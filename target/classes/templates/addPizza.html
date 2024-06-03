@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Pizza | Pizza Creed</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Lemon', cursive;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            position: fixed;
+        }
+        .sidebar h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 40px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .content {
+            margin-left: 240px;
+            padding: 20px;
+            width: 600px;
+
+        }
+        .btn-logout {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+        }
+        .btn-logout:hover {
+            background-color: #c82333;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+        .card {
+            padding: 20px;
+            margin-top: 20px;
+            background-color: lightgray;
+            border: #343a40 1px;
+
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2 style="font-family: 'Pacifico', cursive; font-size: 40px">Pizza Creed</h2>
+    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="/addPizza"><i class="fas fa-pizza-slice"></i> Add Pizza</a>
+    <a href="/menu"><i class="fas fa-list"></i> Menu</a>
+    <div class="mt-auto">
+        <a class="btn btn-logout w-100 mt-4" href="/login"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <p th:if="${username}" class="mt-3 text-center">Logged in as <span class="fw-bold" th:text="${username}"></span></p>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="content" style="width: 700px; margin-left: 500px">
+    <h1 style="font-family: 'Pacifico', cursive; color: black; text-align: center">Add Pizza 🍕</h1>
+    <div th:if="${successMessage}" class="alert alert-success">
+        <strong th:text="${successMessage}"></strong>
+    </div>
+    <div class="card">
+        <p class="lead">Add a new pizza to the menu:</p>
+        <form th:action="@{/addPizza}" th:object="${newPizza}" method="post">
+            <div class="form-group mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required/>
+            </div>
+            <div class="form-group mb-3">
+                <label for="size" class="form-label">Size:</label>
+                <select class="form-control" id="size" th:field="*{size}" required>
+                    <option value="SMALL">Small</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="LARGE">Large</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input type="text" class="form-control" id="price" th:field="*{price}" required/>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2" style="width: 620px">Add Pizza</button>
+        </form>
+        <a href="/menu" class="btn btn-secondary mt-4">Back to Menu</a>
+    </div>
+</div>
+</body>
+</html>

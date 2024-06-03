@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza | Pizza Creed</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Lemon', cursive;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+            transform: scale(1.05);
+        }
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1rem;
+            padding: 5px 10px;
+            width: 80px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1rem;
+            padding: 5px 10px;
+            width: 80px;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+            transform: scale(1.05);
+        }
+        .list-group-item {
+            margin-bottom: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            transition: box-shadow 0.3s;
+            padding: 20px;
+        }
+        .list-group-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .alert-success {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Pizza Creed</h2>
+    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="/addPizza"><i class="fas fa-pizza-slice"></i> Add Pizza</a>
+    <a href="/menu"><i class="fas fa-list"></i> Menu</a>
+</div>
+
+<!-- Content -->
+<div class="content">
+    <h1 style="font-family: 'Pacifico', cursive; color: black; text-align: center">Pizza Menu</h1>
+    <div th:if="${successMessage}" class="alert alert-success">
+        <strong th:text="${successMessage}"></strong>
+    </div>
+    <p class="lead text-center mb-4">List Of Pizza</p>
+
+    <ul class="list-group" style="background-color: darkgray">
+        <!-- Use Bootstrap list-group to style the list -->
+        <li th:each="pizza : ${pizzas}" class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" th:text="${pizza.name}">Pizza Name</h5>
+                <small th:text="${pizza.size}" class="text-muted">Pizza Size</small>
+            </div>
+            <p class="mb-1">
+                <strong th:text="${pizza.price}" class="text-success">Pizza Price</strong>
+            </p>
+            <!-- Add edit and delete buttons -->
+            <div class="btn-group">
+                <a th:href="@{'/editPizza/' + ${pizza.id}}" class="btn btn-sm btn-primary">Edit</a>
+                <a th:href="@{'/deletePizza/' + ${pizza.id}}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

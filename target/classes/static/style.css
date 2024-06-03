@@ -1,0 +1,16 @@
+
+
+.fnt-lemon{
+    font-family: 'Lemon', serif;
+}
+.fnt-pacifico {
+    font-family: 'Pacifico', cursive;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 100px;
+}

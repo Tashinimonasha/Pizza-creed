@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Pizza | Pizza Creed</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: url('/images/image1.jpg') no-repeat center center fixed;;
+             background-size: cover;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center text-primary mb-4">Edit Pizza</h1>
+    <form th:action="@{'/editPizza/' + ${pizza.id}}" th:object="${pizza}" method="post">
+        <div class="form-group">
+            <label for="name">Pizza Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" th:value="${pizza.name}" placeholder="Enter pizza name" required>
+        </div>
+        <div class="form-group">
+            <label for="size">Pizza Size</label>
+            <select class="form-control" id="size" th:field="*{size}" required>
+                <option value="SMALL" th:selected="${pizza.size == 'SMALL'}">Small</option>
+                <option value="MEDIUM" th:selected="${pizza.size == 'MEDIUM'}">Medium</option>
+                <option value="LARGE" th:selected="${pizza.size == 'LARGE'}">Large</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Pizza Price</label>
+            <input type="number" class="form-control" id="price" th:field="*{price}" th:value="${pizza.price}" placeholder="Enter pizza price" step="0.01" required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+</div>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
