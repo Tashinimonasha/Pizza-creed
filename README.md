@@ -62,3 +62,5 @@ Access the admin panel at `http://localhost:8181/login` with:
 
 - Username: admin
 - Password: admin
+  
+Create this project for EAD2
